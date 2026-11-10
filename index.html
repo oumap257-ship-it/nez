@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Glow Cosmetics | Luxury Beauty Sale (Texas, Chicago, NY)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        roseGold: {
+                            50: '#fff5f7',
+                            100: '#fed7e2',
+                            200: '#fbb6ce',
+                            300: '#f687b3',
+                            400: '#ed64a6',
+                            500: '#d47a8d',
+                            600: '#b85c70',
+                            700: '#9b4255',
+                            800: '#7e2d3e',
+                            900: '#521422',
+                        },
+                        champagne: '#f8f4ec',
+                        darkCharcoal: '#1a1918'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcfbfa;
+            color: #1a1918;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d47a8d;
+            border-radius: 4px;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-roseGold-200 selection:text-roseGold-900">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-roseGold-700 via-roseGold-600 to-roseGold-800 text-white text-xs md:text-sm py-2 px-4 text-center font-medium tracking-wide flex justify-between items-center px-6">
+        <div class="hidden md:flex items-center space-x-2">
+            <i class="fa-solid fa-truck-fast">active</i>
+            <span>Express Delivery in Texas, Chicago IL & New York NY</span>
+        </div>
+        <div class="mx-auto md:mx-0">
+            🔥 MEGA CLEARANCE SALE: <strong>UP TO 70% OFF SITEWIDE</strong> - LIMITED STOCK!
+        </div>
+        <div class="hidden lg:flex items-center space-x-4 text-xs">
+            <span><i class="fa-regular fa-envelope mr-1"></i> nexoradigitalke45@gmail.com</span>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-40 glass-nav border-b border-rose-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20 gap-4">
+                
+                <!-- Logo -->
+                <div class="flex-shrink-0 cursor-pointer flex items-center gap-2" onclick="resetFilters()">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-roseGold-600 to-roseGold-300 flex items-center justify-center text-white font-serif font-bold text-xl shadow-md">
+                        A
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight bg-gradient-to-r from-roseGold-800 to-roseGold-600 bg-clip-text text-transparent">Aura Glow</span>
+                        <span class="block text-[10px] uppercase tracking-widest text-roseGold-600 font-semibold -mt-1">Cosmetics</span>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-xl mx-2 hidden sm:block">
+                    <div class="relative">
+                        <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search 100+ beauty products (e.g. Serum, Lipstick, Chanel)..." 
+                            class="w-full pl-10 pr-4 py-2.5 rounded-full border border-rose-200 bg-roseGold-50/40 text-sm focus:outline-none focus:ring-2 focus:ring-roseGold-500 focus:bg-white transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-roseGold-400 text-sm"></i>
+                    </div>
+                </div>
+
+                <!-- Right Menu: Location & Cart -->
+                <div class="flex items-center gap-3 md:gap-5">
+                    
+                    <!-- Region Selector -->
+                    <div class="relative inline-block text-left">
+                        <div class="flex items-center bg-rose-50 border border-rose-200 rounded-full px-3 py-1.5 text-xs text-roseGold-800 font-medium cursor-pointer">
+                            <i class="fa-solid fa-location-dot text-roseGold-600 mr-1.5"></i>
+                            <select id="locationSelect" onchange="updateLocationBanner()" class="bg-transparent focus:outline-none cursor-pointer font-semibold">
+                                <option value="Texas">Texas (TX)</option>
+                                <option value="Chicago">Chicago (IL)</option>
+                                <option value="New York">New York (NY)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-full text-gray-700 hover:text-roseGold-600 hover:bg-rose-50 transition">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cartBadge" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/3 -translate-y-1/3 bg-roseGold-600 rounded-full shadow-sm">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar (Only visible on small screens) -->
+            <div class="pb-3 block sm:hidden">
+                <div class="relative">
+                    <input type="text" id="searchInputMobile" oninput="handleSearchMobile()" placeholder="Search 100+ luxury beauty items..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-rose-200 bg-roseGold-50/50 text-xs focus:outline-none focus:ring-2 focus:ring-roseGold-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-roseGold-400 text-xs"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative bg-gradient-to-r from-roseGold-900 via-roseGold-800 to-darkCharcoal text-white overflow-hidden py-12 md:py-16">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-center lg:text-left">
+                    <span class="inline-block bg-roseGold-500/30 text-roseGold-200 border border-roseGold-400/40 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">
+                        Exclusive Regional Warehouse Clearance
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold leading-tight">
+                        Luxury Beauty, <br><span class="text-roseGold-200 italic">Unbeatable Discounts.</span>
+                    </h1>
+                    <p class="text-rose-100 text-sm sm:text-base max-w-xl font-light">
+                        Direct distribution savings up to <strong class="text-white underline decoration-roseGold-400 font-bold">70% OFF</strong> across <span id="heroRegionText">Texas, Chicago, and New York</span>. Authentic premium makeup, skincare, and fragrances.
+                    </p>
+                    <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <a href="#catalog" class="px-6 py-3 rounded-full bg-white text-roseGold-900 font-semibold text-sm hover:bg-roseGold-100 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            Shop Discounted Items
+                        </a>
+                        <div class="flex items-center gap-2 text-xs text-rose-200 py-3">
+                            <i class="fa-solid fa-shield-halved text-roseGold-300"></i> 100% Authentic Guaranteed
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Deal Banner Card -->
+                <div class="hidden lg:flex justify-end">
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 max-w-md w-full shadow-2xl relative overflow-hidden">
+                        <div class="absolute -right-6 -top-6 bg-red-600 text-white font-bold text-xs px-8 py-2 rotate-45 text-center shadow">
+                            70% OFF
+                        </div>
+                        <span class="text-roseGold-300 font-semibold text-xs tracking-wider uppercase">Deal of the Day</span>
+                        <h3 class="text-xl font-serif font-bold mt-1 text-white">Radiance Gold Renewal Serum</h3>
+                        <p class="text-xs text-rose-200 mt-1">Infused with Pure 24K Gold Particles & Hyaluronic Acid</p>
+                        <div class="mt-4 flex items-baseline gap-3">
+                            <span class="text-3xl font-bold text-white">$29.99</span>
+                            <span class="text-sm text-rose-300 line-through">$99.99</span>
+                            <span class="bg-emerald-500/80 text-white text-[10px] px-2 py-0.5 rounded font-bold">Save $70.00</span>
+                        </div>
+                        <button onclick="quickAddToCart(1)" class="mt-5 w-full py-2.5 bg-gradient-to-r from-roseGold-500 to-roseGold-600 hover:from-roseGold-600 hover:to-roseGold-700 text-white font-medium rounded-xl text-sm transition shadow-md">
+                            Add Deal To Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full" id="catalog">
+        
+        <!-- Filter Controls & Category Tabs -->
+        <div class="space-y-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-rose-100 pb-5">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold text-gray-900">Curated Beauty Collection</h2>
+                    <p class="text-xs text-gray-500 mt-1">Showing <span id="productCount" class="font-bold text-roseGold-700">100</span> high-performance beauty items on sale</p>
+                </div>
+
+                <!-- Sort & Filter options -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <label for="sortBy" class="text-xs text-gray-500 font-medium">Sort by:</label>
+                    <select id="sortBy" onchange="applyFilters()" class="text-xs border border-gray-200 rounded-lg px-3 py-2 bg-white text-gray-700 font-medium focus:outline-none focus:ring-2 focus:ring-roseGold-400">
+                        <option value="discount">Biggest Discount (%)</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="name">Name (A-Z)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Categories Horizontal Scroll -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar text-sm" id="categoryTabs">
+                <button onclick="filterCategory('All')" class="category-btn active px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-roseGold-700 text-white shadow-sm">
+                    All Products (100+)
+                </button>
+                <button onclick="filterCategory('Skincare')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Skincare
+                </button>
+                <button onclick="filterCategory('Makeup')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Makeup
+                </button>
+                <button onclick="filterCategory('Haircare')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Haircare
+                </button>
+                <button onclick="filterCategory('Fragrance')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Fragrance
+                </button>
+                <button onclick="filterCategory('Body Care')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Body Care
+                </button>
+                <button onclick="filterCategory('Tools & Accessories')" class="category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200">
+                    Beauty Tools
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic JS Rendering Target -->
+        </div>
+
+        <!-- No Products Found State -->
+        <div id="noResults" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300">
+            <i class="fa-solid fa-basket-shopping text-4xl text-gray-300 mb-3"></i>
+            <h3 class="text-lg font-semibold text-gray-700">No beauty products matched your search</h3>
+            <p class="text-xs text-gray-500 mt-1">Try adjusting your filters or keyword query.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-roseGold-600 text-white text-xs rounded-full font-medium hover:bg-roseGold-700 transition">Reset All Filters</button>
+        </div>
+
+        <!-- Pagination / Load More Controls -->
+        <div class="mt-12 text-center" id="loadMoreContainer">
+            <button id="loadMoreBtn" onclick="loadMoreProducts()" class="px-8 py-3 bg-white border border-roseGold-300 text-roseGold-800 rounded-full font-semibold text-sm hover:bg-roseGold-50 shadow-sm transition inline-flex items-center gap-2">
+                <span>Load More Products</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Slide-over Shopping Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <!-- Backdrop -->
+        <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onclick="toggleCartDrawer(false)"></div>
+
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between">
+                
+                <!-- Drawer Header -->
+                <div class="p-6 bg-rose-50 border-b border-rose-100 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-roseGold-700 text-xl"></i>
+                        <h2 class="text-lg font-serif font-bold text-gray-900">Your Shopping Cart</h2>
+                        <span id="drawerItemCount" class="text-xs bg-roseGold-200 text-roseGold-800 font-bold px-2 py-0.5 rounded-full">0 items</span>
+                    </div>
+                    <button onclick="toggleCartDrawer(false)" class="text-gray-400 hover:text-gray-600 p-1">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Drawer Body (Items List) -->
+                <div id="cartItemsList" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                    <!-- Dynamic Cart Items Rendered Here -->
+                </div>
+
+                <!-- Drawer Footer (Subtotal & Checkout) -->
+                <div class="p-6 bg-gray-50 border-t border-gray-100 space-y-4">
+                    <div class="space-y-1.5 text-xs">
+                        <div class="flex justify-between text-gray-500">
+                            <span>Estimated Retail Total:</span>
+                            <span id="cartOriginalTotal" class="line-through">$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-emerald-600 font-medium">
+                            <span>Total Savings (Up to 70% Off):</span>
+                            <span id="cartSavings">-$0.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-gray-200">
+                            <span>Discounted Total:</span>
+                            <span id="cartSubtotal" class="text-xl text-roseGold-700 font-serif">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="text-[11px] text-gray-500 bg-rose-50/70 p-2.5 rounded-lg border border-rose-100 flex items-center gap-2">
+                        <i class="fa-solid fa-truck text-roseGold-600"></i>
+                        <span>Ships from local hub to <strong><span id="cartDeliveryRegion">Texas</span></strong> within 24-48 Hours.</span>
+                    </div>
+
+                    <button onclick="openCheckoutModal()" id="checkoutBtn" class="w-full py-3.5 bg-gradient-to-r from-roseGold-600 to-roseGold-700 hover:from-roseGold-700 hover:to-roseGold-800 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                        <span>Proceed to PayPal Checkout</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Modal Backdrop -->
+            <div class="fixed inset-0 transition-opacity bg-gray-900 bg-opacity-60" onclick="closeCheckoutModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-rose-100">
+                <div class="bg-gradient-to-r from-roseGold-700 to-roseGold-800 p-6 text-white flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-serif font-bold">Complete Your Order</h3>
+                        <p class="text-xs text-rose-100 mt-0.5">Secure payment processing to PayPal merchant account</p>
+                    </div>
+                    <button onclick="closeCheckoutModal()" class="text-rose-200 hover:text-white">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <form id="checkoutForm" onsubmit="handlePayPalPayment(event)" class="p-6 space-y-4">
+                    
+                    <!-- Order Summary Mini Card -->
+                    <div class="bg-roseGold-50/50 p-4 rounded-xl border border-rose-100 space-y-2">
+                        <div class="flex justify-between text-xs font-semibold text-gray-700">
+                            <span>Merchant Destination:</span>
+                            <span class="text-roseGold-800 font-mono">newtonodhiambo887@gmail.com</span>
+                        </div>
+                        <div class="flex justify-between text-xs font-semibold text-gray-700">
+                            <span>Delivery Region:</span>
+                            <span id="modalRegion" class="text-gray-900">Texas (TX)</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-bold text-gray-900 pt-2 border-t border-rose-200/60">
+                            <span>Amount Due:</span>
+                            <span id="modalPayableTotal" class="text-roseGold-700 text-lg font-serif">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Customer Information Inputs -->
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500">Shipping Details</h4>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Full Name *</label>
+                            <input type="text" required placeholder="Jane Doe" class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-roseGold-500 focus:outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Email Address *</label>
+                                <input type="email" required placeholder="jane@example.com" class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-roseGold-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Phone Number *</label>
+                                <input type="tel" required placeholder="(555) 000-0000" class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-roseGold-500 focus:outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-700 mb-1">Street Address *</label>
+                            <input type="text" required placeholder="123 Luxury Ave, Suite 400" class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-roseGold-500 focus:outline-none">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">City / State *</label>
+                                <input type="text" id="modalCityInput" required readonly class="w-full text-xs p-2.5 rounded-lg border border-gray-200 bg-gray-100 font-semibold text-gray-700">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-700 mb-1">Zip Code *</label>
+                                <input type="text" required placeholder="75001" class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-roseGold-500 focus:outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Button -->
+                    <div class="pt-3">
+                        <button type="submit" class="w-full py-3.5 bg-[#0070ba] hover:bg-[#005ea6] text-white font-bold rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-paypal text-xl"></i>
+                            <span>Pay Now with PayPal</span>
+                        </button>
+                        <p class="text-[10px] text-center text-gray-400 mt-2">
+                            You will be directed to PayPal to authorize your payment to <br><span class="font-mono text-gray-600">newtonodhiambo887@gmail.com</span>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-gray-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-gray-700">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toastMessage" class="text-xs font-medium">Product added to cart!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-darkCharcoal text-white pt-14 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-gray-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-full bg-roseGold-600 flex items-center justify-center text-white font-serif font-bold text-base">A</div>
+                        <span class="font-serif text-xl font-bold text-white tracking-tight">Aura Glow</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Premier liquidation e-commerce portal providing heavily discounted luxury beauty products across Texas, Chicago (IL), and New York.
+                    </p>
+                    <div class="text-xs text-gray-400 space-y-1">
+                        <p><i class="fa-solid fa-truck text-roseGold-400 mr-2"></i><strong>Shipping Regions:</strong> Texas, Chicago IL, New York NY</p>
+                    </div>
+                </div>
+
+                <!-- Col 2: Inquiries & Contact -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-serif font-bold text-roseGold-300 tracking-wider uppercase">Customer Support</h4>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        For questions, bulk orders, or shipping status inquiries:
+                    </p>
+                    <div class="pt-1 space-y-2 text-xs">
+                        <a href="mailto:nexoradigitalke45@gmail.com" class="flex items-center gap-2 text-roseGold-200 hover:text-white transition">
+                            <i class="fa-regular fa-envelope text-roseGold-500"></i>
+                            <span>nexoradigitalke45@gmail.com</span>
+                        </a>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i class="fa-solid fa-clock text-roseGold-500"></i>
+                            <span>Mon - Fri: 8am - 8pm CST</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Col 3: Policy & Trust -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-serif font-bold text-roseGold-300 tracking-wider uppercase">Policies & Guarantees</h4>
+                    <ul class="text-xs text-gray-400 space-y-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> 100% Authentic Product Guarantee</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> 30-Day Hassle-Free Returns</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Encrypted PayPal Checkout</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Local Hub Delivery Options</li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Payments Accepted -->
+                <div class="space-y-3">
+                    <h4 class="text-sm font-serif font-bold text-roseGold-300 tracking-wider uppercase">Payment Method</h4>
+                    <p class="text-xs text-gray-400">
+                        Direct merchant PayPal orders directed to:
+                    </p>
+                    <div class="p-3 bg-gray-900 rounded-xl border border-gray-800 text-xs font-mono text-roseGold-300 break-all">
+                        newtonodhiambo887@gmail.com
+                    </div>
+                    <div class="flex gap-3 text-2xl text-gray-400 pt-1">
+                        <i class="fa-brands fa-cc-paypal text-blue-400"></i>
+                        <i class="fa-brands fa-cc-visa"></i>
+                        <i class="fa-brands fa-cc-mastercard"></i>
+                        <i class="fa-brands fa-cc-amex"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <p>&copy; 2026 Aura Glow Cosmetics. All Rights Reserved. Serving Texas, Chicago, and New York.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                    <a href="#" class="hover:underline">Terms of Service</a>
+                    <a href="mailto:nexoradigitalke45@gmail.com" class="hover:underline">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // 100+ High Quality Beauty Products Data Generator
+        const categories = ["Skincare", "Makeup", "Haircare", "Fragrance", "Body Care", "Tools & Accessories"];
+        
+        const baseImages = {
+            Skincare: [
+                "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&q=80",
+                "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500&q=80",
+                "https://images.unsplash.com/photo-1608248597261-e4d090453d7e?w=500&q=80",
+                "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=500&q=80",
+                "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500&q=80"
+            ],
+            Makeup: [
+                "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500&q=80",
+                "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500&q=80",
+                "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80",
+                "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=500&q=80",
+                "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500&q=80"
+            ],
+            Haircare: [
+                "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=500&q=80",
+                "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?w=500&q=80",
+                "https://images.unsplash.com/photo-1519735777090-ec97162dc266?w=500&q=80",
+                "https://images.unsplash.com/photo-1526947425960-945c6e72858f?w=500&q=80"
+            ],
+            Fragrance: [
+                "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500&q=80",
+                "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&q=80",
+                "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500&q=80",
+                "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=500&q=80"
+            ],
+            "Body Care": [
+                "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&q=80",
+                "https://images.unsplash.com/photo-1567928269937-ae146e45b428?w=500&q=80",
+                "https://images.unsplash.com/photo-1617897903246-719242758050?w=500&q=80"
+            ],
+            "Tools & Accessories": [
+                "https://images.unsplash.com/photo-1522337660859-02fbefca4702?w=500&q=80",
+                "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=500&q=80",
+                "https://images.unsplash.com/photo-1583241799080-9174151b47fb?w=500&q=80"
+            ]
+        };
+
+        const titlePrefixes = ["Radiant Glow", "Velvet Silk", "Botanical Pure", "Ultra Hydrating", "Rejuvenating", "Luxe Diamond", "Rose Infused", "Midnight Repair", "Supreme Luxe", "Crystal Clear"];
+        const titleSuffixes = ["Serum", "Moisturizer Cream", "Matte Lipstick", "Elixir Oil", "Eau De Parfum", "Cleansing Mask", "Smoothing Conditioner", "Exfoliator Scrub", "Eye Contour Cream", "Hydra Balm"];
+
+        // Generate 104 dynamic discounted beauty items
+        const allProducts = [];
+        let idCounter = 1;
+
+        for (let i = 0; i < 104; i++) {
+            const cat = categories[i % categories.length];
+            const imgs = baseImages[cat];
+            const img = imgs[i % imgs.length];
+            
+            const prefix = titlePrefixes[(i * 3) % titlePrefixes.length];
+            const suffix = titleSuffixes[(i * 5) % titleSuffixes.length];
+            const title = `${prefix} ${suffix} ${cat === 'Fragrance' ? '50ml' : ''}`.trim();
+
+            // Original retail price ($45 to $220)
+            const origPrice = Math.floor(Math.random() * (220 - 45 + 1)) + 45;
+            // Heavily discounted percentage (40% to 70% off)
+            const discountPct = Math.floor(Math.random() * (70 - 40 + 1)) + 40;
+            const salePrice = Number((origPrice * (1 - discountPct / 100)).toFixed(2));
+            const rating = (Math.random() * (5.0 - 4.3) + 4.3).toFixed(1);
+            const reviewsCount = Math.floor(Math.random() * 450) + 25;
+
+            allProducts.push({
+                id: idCounter++,
+                title: title,
+                category: cat,
+                originalPrice: origPrice,
+                price: salePrice,
+                discount: discountPct,
+                rating: parseFloat(rating),
+                reviews: reviewsCount,
+                image: img
+            });
+        }
+
+        // Global State
+        let currentProducts = [...allProducts];
+        let currentCategory = 'All';
+        let searchQuery = '';
+        let displayLimit = 16;
+        let cart = [];
+        let selectedLocation = 'Texas';
+
+        // Initialize App
+        window.onload = function() {
+            renderProducts();
+            updateLocationBanner();
+        };
+
+        // Render Product Cards Grid
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const noRes = document.getElementById('noResults');
+            const loadBtn = document.getElementById('loadMoreContainer');
+
+            // Apply category + search filter
+            let filtered = allProducts.filter(p => {
+                const matchesCat = currentCategory === 'All' || p.category === currentCategory;
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.category.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCat && matchesSearch;
+            });
+
+            // Apply Sort
+            const sortBy = document.getElementById('sortBy').value;
+            if (sortBy === 'discount') filtered.sort((a,b) => b.discount - a.discount);
+            if (sortBy === 'price-low') filtered.sort((a,b) => a.price - b.price);
+            if (sortBy === 'price-high') filtered.sort((a,b) => b.price - a.price);
+            if (sortBy === 'rating') filtered.sort((a,b) => b.rating - a.rating);
+            if (sortBy === 'name') filtered.sort((a,b) => a.title.localeCompare(b.title));
+
+            document.getElementById('productCount').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                noRes.classList.remove('hidden');
+                loadBtn.classList.add('hidden');
+                return;
+            } else {
+                noRes.classList.add('hidden');
+            }
+
+            // Visible slice for pagination
+            const visibleItems = filtered.slice(0, displayLimit);
+            
+            if (visibleItems.length >= filtered.length) {
+                loadBtn.classList.add('hidden');
+            } else {
+                loadBtn.classList.remove('hidden');
+            }
+
+            grid.innerHTML = visibleItems.map(product => `
+                <div class="bg-white rounded-2xl border border-rose-100/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group overflow-hidden">
+                    <div class="relative overflow-hidden aspect-square bg-gray-50">
+                        <!-- Discount Badge -->
+                        <span class="absolute top-3 left-3 z-10 bg-gradient-to-r from-red-600 to-roseGold-700 text-white font-bold text-xs px-2.5 py-1 rounded-full shadow-md">
+                            -${product.discount}% OFF
+                        </span>
+                        
+                        <img src="${product.image}" alt="${product.title}" 
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            onerror="this.src='https://placehold.co/500x500/f8f4ec/d47a8d?text=Luxury+Beauty'">
+                        
+                        <button onclick="quickAddToCart(${product.id})" class="absolute bottom-3 right-3 bg-white/90 hover:bg-roseGold-600 hover:text-white text-gray-800 p-2.5 rounded-full shadow-md backdrop-blur-sm transition">
+                            <i class="fa-solid fa-cart-plus text-base"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-roseGold-600 tracking-wider">${product.category}</span>
+                            <h3 class="text-sm font-semibold text-gray-900 group-hover:text-roseGold-700 transition line-clamp-2 mt-0.5">${product.title}</h3>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs mb-1.5">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="font-bold text-gray-800 text-[11px]">${product.rating}</span>
+                                <span class="text-gray-400 text-[10px]">(${product.reviews})</span>
+                            </div>
+
+                            <div class="flex items-baseline justify-between border-t border-rose-50 pt-2">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-lg font-bold text-roseGold-800 font-serif">$${product.price.toFixed(2)}</span>
+                                    <span class="text-xs text-gray-400 line-through">$${product.originalPrice.toFixed(2)}</span>
+                                </div>
+                                <button onclick="addToCart(${product.id})" class="text-xs bg-rose-50 hover:bg-roseGold-600 hover:text-white text-roseGold-800 font-semibold px-3 py-1.5 rounded-lg transition">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Category Filter Tabs Handler
+        function filterCategory(cat) {
+            currentCategory = cat;
+            displayLimit = 16;
+            
+            // Update active styles
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.includes(cat) || (cat === 'All' && btn.innerText.includes('All'))) {
+                    btn.className = "category-btn active px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-roseGold-700 text-white shadow-sm";
+                } else {
+                    btn.className = "category-btn px-4 py-2 rounded-full whitespace-nowrap font-medium transition bg-white text-gray-700 hover:bg-rose-50 border border-gray-200";
+                }
+            });
+
+            renderProducts();
+        }
+
+        // Search Handlers
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value;
+            displayLimit = 16;
+            renderProducts();
+        }
+        function handleSearchMobile() {
+            searchQuery = document.getElementById('searchInputMobile').value;
+            displayLimit = 16;
+            renderProducts();
+        }
+
+        // Reset Filters
+        function resetFilters() {
+            currentCategory = 'All';
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            if (document.getElementById('searchInputMobile')) {
+                document.getElementById('searchInputMobile').value = '';
+            }
+            document.getElementById('sortBy').value = 'discount';
+            filterCategory('All');
+        }
+
+        function applyFilters() {
+            renderProducts();
+        }
+
+        function loadMoreProducts() {
+            displayLimit += 16;
+            renderProducts();
+        }
+
+        // Region Location Handler
+        function updateLocationBanner() {
+            const loc = document.getElementById('locationSelect').value;
+            selectedLocation = loc;
+            document.getElementById('heroRegionText').innerText = loc === 'Texas' ? 'Texas (TX) & Surrounding Areas' : loc === 'Chicago' ? 'Chicago (IL) Hub' : 'New York (NY) Metro';
+            document.getElementById('cartDeliveryRegion').innerText = loc;
+            document.getElementById('modalRegion').innerText = `${loc} Delivery Hub`;
+            document.getElementById('modalCityInput').value = `${loc}, USA`;
+        }
+
+        // Cart Operations
+        function addToCart(productId) {
+            const prod = allProducts.find(p => p.id === productId);
+            if (!prod) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...prod, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added "${prod.title}" to cart!`);
+        }
+
+        function quickAddToCart(productId) {
+            addToCart(productId);
+            toggleCartDrawer(true);
+        }
+
+        function updateCartQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                cart = cart.filter(i => i.id !== productId);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartBadge').innerText = totalCount;
+            document.getElementById('drawerItemCount').innerText = `${totalCount} item${totalCount !== 1 ? 's' : ''}`;
+
+            const cartList = document.getElementById('cartItemsList');
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-gray-200 mb-3"></i>
+                        <p class="text-sm font-semibold text-gray-600">Your shopping cart is empty</p>
+                        <p class="text-xs text-gray-400 mt-1">Explore our 100+ heavily discounted beauty items!</p>
+                    </div>
+                `;
+                document.getElementById('cartOriginalTotal').innerText = "$0.00";
+                document.getElementById('cartSavings').innerText = "-$0.00";
+                document.getElementById('cartSubtotal').innerText = "$0.00";
+                document.getElementById('checkoutBtn').disabled = true;
+                document.getElementById('checkoutBtn').classList.add('opacity-50', 'cursor-not-allowed');
+                return;
+            }
+
+            document.getElementById('checkoutBtn').disabled = false;
+            document.getElementById('checkoutBtn').classList.remove('opacity-50', 'cursor-not-allowed');
+
+            let subtotal = 0;
+            let originalTotal = 0;
+
+            cartList.innerHTML = cart.map(item => {
+                const itemSub = item.price * item.quantity;
+                const itemOrigSub = item.originalPrice * item.quantity;
+                subtotal += itemSub;
+                originalTotal += itemOrigSub;
+
+                return `
+                    <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-rose-100 shadow-sm">
+                        <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded-lg bg-gray-50 flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="text-xs font-bold text-gray-900 truncate">${item.title}</h4>
+                            <span class="text-[10px] text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">${item.discount}% OFF</span>
+                            <div class="flex items-baseline gap-1.5 mt-1">
+                                <span class="text-xs font-bold text-roseGold-700">$${item.price.toFixed(2)}</span>
+                                <span class="text-[10px] text-gray-400 line-through">$${item.originalPrice.toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <!-- Quantity Controls -->
+                        <div class="flex flex-col items-end gap-1">
+                            <div class="flex items-center border border-gray-200 rounded-lg bg-gray-50">
+                                <button onclick="updateCartQuantity(${item.id}, -1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-rose-100 rounded-l-lg">-</button>
+                                <span class="px-2 text-xs font-bold text-gray-800">${item.quantity}</span>
+                                <button onclick="updateCartQuantity(${item.id}, 1)" class="px-2 py-0.5 text-xs text-gray-600 hover:bg-rose-100 rounded-r-lg">+</button>
+                            </div>
+                            <button onclick="removeFromCart(${item.id})" class="text-[10px] text-red-500 hover:underline">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const totalSavings = originalTotal - subtotal;
+            document.getElementById('cartOriginalTotal').innerText = `$${originalTotal.toFixed(2)}`;
+            document.getElementById('cartSavings').innerText = `-$${totalSavings.toFixed(2)}`;
+            document.getElementById('cartSubtotal').innerText = `$${subtotal.toFixed(2)}`;
+            document.getElementById('modalPayableTotal').innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        // Cart Drawer Toggle
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            if (open) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        // Checkout Modal Toggle
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            toggleCartDrawer(false);
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        // Handle PayPal Submission Redirect Workflow
+        function handlePayPalPayment(event) {
+            event.preventDefault();
+            
+            const merchantEmail = "newtonodhiambo887@gmail.com";
+            const totalAmount = cart.reduce((sum, i) => sum + (i.price * i.quantity), 0).toFixed(2);
+            const itemName = `Aura Glow Cosmetics Order (${cart.length} beauty items - Delivery to ${selectedLocation})`;
+
+            // Construct PayPal Standard Checkout Link
+            const paypalUrl = `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${encodeURIComponent(merchantEmail)}&item_name=${encodeURIComponent(itemName)}&amount=${encodeURIComponent(totalAmount)}&currency_code=USD`;
+
+            showToast("Redirecting to PayPal Checkout...");
+
+            setTimeout(() => {
+                window.open(paypalUrl, '_blank');
+                closeCheckoutModal();
+                cart = [];
+                updateCartUI();
+            }, 1000);
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
